@@ -1,0 +1,23 @@
+{
+  "name": "js-ajax-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint-staged": "lint-staged",
+    "http-server": "http-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "http-server": "14.1.1",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.3",
+    "yarn": "^1.22.19"
+  }
+}
