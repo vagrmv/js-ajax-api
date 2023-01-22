@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS-AJAX-API Homework</title>
+    <!-- star jedi font -->
+    <link rel="preload" href="assets/StarJedi.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Montserrat font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/8938bdfe08.js" crossorigin="anonymous"></script>
+    <!-- my css -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-    <form action="">
-        <datalist class="suggestions" id="suggestions">
-            <option value="ang"></option>
-            <option value="vov"></option>
-            <option value="len"></option>
-            <option value="das"></option>
-            <option value="vik"></option>
-        </datalist>
-        <input type="text" list="suggestions">
-    </form>
 
-    <h1>Hello, World!</h1>
+<body class="body">
+
+    
 
     <script src="index.js"></script>
-</body>
+</body class="body">
+
+    <main class="page">
+        <h1 class="page__title"><i class="fa-brands fa-jedi-order"></i> starwars character search <i class="fa-brands fa-jedi-order"></i></h1>
+        <div class="page__content">
+            <div class="page__main">
+                <div class="search">
+                    <!-- <h3 class="heading">Search character</h3> -->
+                    <input type="search" class="search__input" placeholder="Search character...">
+                    <div class="search__result-box"></div>
+                </div>
+                <div class="character">
+                    <h2 class="heading">Result</h2>
+                    <hr class="divider">
+                </div>
+            </div>
+            <div class="page__history">
+                <h2 class="heading">History</h2>
+                <hr class="divider">
+            </div>
+        </div>
+    </main>
+
 </html>

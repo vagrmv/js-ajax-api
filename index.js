@@ -39,9 +39,5 @@ async function loadNamesAndURLs() {
     } catch (error) {
         throw error;
     }
-    return people.forEach((person) => {
-        console.log(`name: ${person.name}\nurl: ${person.url}`);
-    });
+    return people
 }
-
-loadNamesAndURLs();

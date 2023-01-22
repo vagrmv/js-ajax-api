@@ -1,7 +1,107 @@
-h1 {
-    color: darkcyan;
+:root {
+    --clr-brand: #ffd400;
+    --border-radius: 15px;
+    --gap: 15px;
 }
-input{
-    display: inline-block;
-    margin-top: 100px;
+
+@font-face {
+    font-family: 'Star Jedi';
+    src: url('assets/StarJedi.eot');
+    src: url('assets/StarJedi.eot?#iefix') format('embedded-opentype'),
+        url('assets/StarJedi.woff2') format('woff2'),
+        url('assets/StarJedi.woff') format('woff'),
+        url('assets/StarJedi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    background: black url(assets/background.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.heading {
+    font-family: "Montserrat", sans-serif;
+    color: var(--clr-brand);
+}
+
+.page {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.page__content {
+    margin-top: var(--gap);
+    display: flex;
+    gap: var(--gap);
+}
+
+.page__title {
+    border: 1px solid var(--clr-brand);
+    border-radius: var(--border-radius);
+    padding: var(--gap);
+    background-color: rgba(0, 0, 0, .9);
+
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    color: var(--clr-brand);
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 40px;
+}
+
+.page__main {
+    width: 100%;
+}
+
+.page__history{
+    border: 1px solid var(--clr-brand);
+    border-radius: var(--border-radius);
+    padding: var(--gap);
+    background-color: rgba(0, 0, 0, .9);
+}
+
+.search {}
+
+.search__input {
+    border: 1px solid var(--clr-brand);
+    border-radius: var(--border-radius);
+    padding: var(--gap);
+    background-color: rgba(0, 0, 0, .9);
+
+    width: 100%;
+    color: var(--clr-brand);
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+}
+
+.search__result-box {
+    /* width: 30%;
+    max-width: 300px; */
+}
+
+.character {
+    border: 1px solid var(--clr-brand);
+    border-radius: var(--border-radius);
+    padding: var(--gap);
+    background-color: rgba(0, 0, 0, .9);
+
+    margin-top: var(--gap);
 }
