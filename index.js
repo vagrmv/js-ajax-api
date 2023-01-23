@@ -41,3 +41,15 @@ async function loadNamesAndURLs() {
     }
     return people
 }
+
+
+
+
+// const input = document.getElementById('input');
+// const resultBox = document.getElementById('resultBox');
+
+// input.addEventListener('click', (e) => {
+//     e.preventDefault();
+
+//     resultBox.classList.toggle('active');
+// })
