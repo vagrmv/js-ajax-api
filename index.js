@@ -27,8 +27,6 @@ window.addEventListener('load', async () => {
 });
 
 window.addEventListener('load', () => {
-    console.log(window.localStorage);
-
     createChracterInnerHTML([]);
     createHistoryInnerHTML();
 });
@@ -53,6 +51,8 @@ input.addEventListener('input', (e) => {
         }
         if (visited.length) {
             visited.forEach((item) => resultBox.appendChild(item));
+        }
+        if (visited.length && notVisited.length) {
             const divider = document.createElement('hr');
             divider.classList.add('divider');
             resultBox.appendChild(divider);
@@ -132,7 +132,9 @@ async function linkClickHandler(e) {
     resultBox.classList.remove('active');
 
     const prevRecords = JSON.parse(window.localStorage.getItem('records'));
-    if (prevRecords && prevRecords.every((item) => item.name !== record.name)) {
+    if (!prevRecords) {
+        window.localStorage.setItem('records', JSON.stringify([record]));
+    } else if (prevRecords.every((item) => item.name !== record.name)) {
         prevRecords.unshift(record);
         window.localStorage.setItem('records', JSON.stringify(prevRecords));
     }
