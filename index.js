@@ -44,7 +44,7 @@ input.addEventListener('input', (e) => {
         const notVisited = [];
         for (const person of peopleNamesAndURLs) {
             if (person.name.substr(0, value.length).toUpperCase() === value.toUpperCase()) {
-                if (storage.every((item) => item.name !== person.name)) {
+                if (storage && storage.every((item) => item.name !== person.name)) {
                     notVisited.push(createLinkElement(person, 'search__link'));
                 } else {
                     visited.push(createLinkElement(person, 'search__link', true));
@@ -198,7 +198,9 @@ function createHistoryInnerHTML() {
     history.appendChild(divider);
 
     const records = JSON.parse(window.localStorage.getItem('records'));
-    for (const record of records) {
-        history.appendChild(createLinkElement(record, 'page__history-link'));
+    if (records) {
+        for (const record of records) {
+            history.appendChild(createLinkElement(record, 'page__history-link'));
+        }
     }
 }
