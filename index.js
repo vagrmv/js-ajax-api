@@ -20,7 +20,6 @@ const input = document.getElementById('input');
 const resultBox = document.getElementById('resultBox');
 const character = document.getElementById('character');
 const history = document.getElementById('history');
-window.localStorage.setItem('records', JSON.stringify([]));
 let peopleNamesAndURLs = [];
 
 window.addEventListener('load', async () => {
@@ -40,11 +39,26 @@ input.addEventListener('input', (e) => {
     if (!value) {
         resultBox.classList.remove('active');
     } else {
+        const storage = JSON.parse(window.localStorage.getItem('records'));
+        const visited = [];
+        const notVisited = [];
         for (const person of peopleNamesAndURLs) {
             if (person.name.substr(0, value.length).toUpperCase() === value.toUpperCase()) {
-                // TODO: добавить разделение на посещенные и нет
-                resultBox.appendChild(createLinkElement(person, 'search__link'));
+                if (storage.every((item) => item.name !== person.name)) {
+                    notVisited.push(createLinkElement(person, 'search__link'));
+                } else {
+                    visited.push(createLinkElement(person, 'search__link', true));
+                }
             }
+        }
+        if (visited.length) {
+            visited.forEach((item) => resultBox.appendChild(item));
+            const divider = document.createElement('hr');
+            divider.classList.add('divider');
+            resultBox.appendChild(divider);
+        }
+        if (notVisited.length) {
+            notVisited.forEach((item) => resultBox.appendChild(item));
         }
         if (!resultBox.innerHTML) {
             resultBox.textContent = 'No matches found';
@@ -118,7 +132,7 @@ async function linkClickHandler(e) {
     resultBox.classList.remove('active');
 
     const prevRecords = JSON.parse(window.localStorage.getItem('records'));
-    if (prevRecords.every((item) => item.name !== record.name)) {
+    if (prevRecords && prevRecords.every((item) => item.name !== record.name)) {
         prevRecords.unshift(record);
         window.localStorage.setItem('records', JSON.stringify(prevRecords));
     }
