@@ -161,6 +161,9 @@
     position: absolute;
     z-index: 10;
     top: calc(100% + var(--gap));
+
+    font-family: 'Montserat',sans-serif;
+    color: var(--clr-brand);
     
     overflow-y: hidden;
 
@@ -176,7 +179,7 @@
     background-color: black;
     opacity: 1;
     padding: var(--gap);
-    max-height: 80vh;
+    max-height: 70vh;
 }
 
 .search__link{
