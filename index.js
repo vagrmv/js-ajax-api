@@ -44,10 +44,10 @@ input.addEventListener('input', (e) => {
         const notVisited = [];
         for (const person of peopleNamesAndURLs) {
             if (person.name.substr(0, value.length).toUpperCase() === value.toUpperCase()) {
-                if (storage && storage.every((item) => item.name !== person.name)) {
-                    notVisited.push(createLinkElement(person, 'search__link'));
-                } else {
+                if (storage && storage.some((item) => item.name === person.name)) {
                     visited.push(createLinkElement(person, 'search__link', true));
+                } else {
+                    notVisited.push(createLinkElement(person, 'search__link'));
                 }
             }
         }
