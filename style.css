@@ -91,6 +91,7 @@
     background-color: var(--clr-black-o90);
 
     width: 20%;
+    min-height: 100px;
 }
 
 .page__history-item {
@@ -215,6 +216,7 @@
     padding: var(--gap);
     background-color: var(--clr-black-o90);
 
+    min-height: 100px;
     margin-top: var(--gap);
 }
 
