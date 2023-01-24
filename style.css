@@ -94,7 +94,7 @@
     min-height: 100px;
 }
 
-.page__history-item {
+.page__history-link {
     text-decoration: none;
     font-family: 'Montserat', sans-serif;
     color: var(--clr-brand);
@@ -105,11 +105,11 @@
     transition: color .2s ease-in;
 }
 
-.page__history-item:hover {
+.page__history-link:hover {
     color: white;
 }
 
-.page__history-item:focus {
+.page__history-link:focus {
     color: white;
     outline: none;
 }

@@ -19,10 +19,19 @@ const featuresToLoad = {
 const input = document.getElementById('input');
 const resultBox = document.getElementById('resultBox');
 const character = document.getElementById('character');
+const history = document.getElementById('history');
+window.localStorage.setItem('records', JSON.stringify([]));
 let peopleNamesAndURLs = [];
 
 window.addEventListener('load', async () => {
     peopleNamesAndURLs = await loadNamesAndURLs();
+});
+
+window.addEventListener('load', () => {
+    console.log(window.localStorage);
+
+    createChracterInnerHTML([]);
+    createHistoryInnerHTML();
 });
 
 input.addEventListener('input', (e) => {
@@ -34,7 +43,7 @@ input.addEventListener('input', (e) => {
         for (const person of peopleNamesAndURLs) {
             if (person.name.substr(0, value.length).toUpperCase() === value.toUpperCase()) {
                 // TODO: добавить разделение на посещенные и нет
-                resultBox.appendChild(createLinkElement(person));
+                resultBox.appendChild(createLinkElement(person, 'search__link'));
             }
         }
         if (!resultBox.innerHTML) {
@@ -85,24 +94,37 @@ async function loadNamesAndURLs() {
     return people;
 }
 
-function createLinkElement(person, isVisited = false) {
+function createLinkElement(person, cssClass, isVisited = false) {
     const link = document.createElement('a');
     link.href = person.url;
-    link.classList.add('search__link');
+    link.classList.add(cssClass);
     if (isVisited) {
-        link.classList.add('search__link_visited');
+        link.classList.add(`${cssClass}_visited`);
     }
     link.textContent = person.name;
-    link.addEventListener('click', suggestionClickHandler);
+    link.addEventListener('click', linkClickHandler);
     return link;
 }
 
-async function suggestionClickHandler(e) {
+async function linkClickHandler(e) {
     e.preventDefault();
+    const record = {
+        name: e.target.textContent,
+        url: e.target.href,
+    };
+
     input.value = null;
     resultBox.innerHTML = null;
     resultBox.classList.remove('active');
-    createChracterInnerHTML(await loadPersonData(e.target.href));
+
+    const prevRecords = JSON.parse(window.localStorage.getItem('records'));
+    if (prevRecords.every((item) => item.name !== record.name)) {
+        prevRecords.unshift(record);
+        window.localStorage.setItem('records', JSON.stringify(prevRecords));
+    }
+
+    createHistoryInnerHTML();
+    createChracterInnerHTML(await loadPersonData(record.url));
 }
 
 async function loadPersonData(url) {
@@ -145,5 +167,24 @@ function createChracterInnerHTML(characterFeatures) {
         featureContainer.appendChild(featureValue);
 
         character.appendChild(featureContainer);
+    }
+}
+
+function createHistoryInnerHTML() {
+    history.innerHTML = null;
+
+    const heading = document.createElement('h2');
+    heading.classList.add('heading');
+    heading.textContent = 'History';
+
+    const divider = document.createElement('hr');
+    divider.classList.add('divider');
+
+    history.appendChild(heading);
+    history.appendChild(divider);
+
+    const records = JSON.parse(window.localStorage.getItem('records'));
+    for (const record of records) {
+        history.appendChild(createLinkElement(record, 'page__history-link'));
     }
 }
