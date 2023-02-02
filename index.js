@@ -29,6 +29,11 @@ window.addEventListener('load', async () => {
 window.addEventListener('load', () => {
     createChracterInnerHTML([]);
     createHistoryInnerHTML();
+
+});
+
+window.addEventListener('storage', () => {
+    createHistoryInnerHTML();
 });
 
 input.addEventListener('input', (e) => {
@@ -132,11 +137,16 @@ async function linkClickHandler(e) {
     resultBox.classList.remove('active');
 
     const prevRecords = JSON.parse(window.localStorage.getItem('records'));
-    if (!prevRecords) {
-        window.localStorage.setItem('records', JSON.stringify([record]));
-    } else if (prevRecords.every((item) => item.name !== record.name)) {
-        prevRecords.unshift(record);
-        window.localStorage.setItem('records', JSON.stringify(prevRecords));
+    try {
+        if (!prevRecords) {
+            window.localStorage.setItem('records', JSON.stringify([record]));
+        } else if (prevRecords.every((item) => item.name !== record.name)) {
+            prevRecords.unshift(record);
+            window.localStorage.setItem('records', JSON.stringify(prevRecords));
+        }
+    }
+    catch (err) {
+        console.log('Something went wrong in setItem to localStorage', err?.message);
     }
 
     createHistoryInnerHTML();
